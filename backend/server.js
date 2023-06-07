@@ -1,0 +1,20 @@
+require("dotenv").config();
+const express = require("express");
+const app = express();
+const ConnectDB = require("./db/con");
+const user = require("./model");
+const cors = require("cors");
+const router = require("./router");
+const port = 8080;
+ConnectDB();
+app.use(express.json());
+app.use(cors());
+app.get("/getuser", router);
+app.post("/adduser", router);
+app.get("/singleuser/:id", router);
+app.delete("/deleteuser/:id", router);
+app.put("/updateuser/:id", router);
+// app.get("/", (req, res) => res.send("hello world"));
+app.listen(port, () => {
+  console.log(`server is running on ${port}`);
+});
